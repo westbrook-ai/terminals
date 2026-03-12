@@ -15,7 +15,7 @@ Giving terminal access to users on Open WebUI requires per-user isolation: separ
 | **Auth** | Open WebUI JWT validation or static API key |
 | **Hard caps** | Admin-enforced limits on CPU, memory, storage, and allowed images |
 | **Multi-environment** | Named policies with routing via `/p/{policy_id}/` |
-| **Network control** | Per-policy `allowed_domains` (full, restricted, or none) |
+| **Network control** | Egress filtering via `env.OPEN_TERMINAL_ALLOWED_DOMAINS` |
 | **Idle cleanup** | Automatic teardown of inactive instances |
 | **Runtime changes** | Update policies via API without redeployment |
 
@@ -47,8 +47,7 @@ curl -X PUT http://localhost:3000/api/v1/policies/data-science \
     "image": "ghcr.io/open-webui/open-terminal:python-ds",
     "cpu_limit": "2",
     "memory_limit": "4Gi",
-    "env": {"OPENAI_API_KEY": "sk-proj-..."},
-    "allowed_domains": ["*.pypi.org", "github.com"],
+    "env": {"OPENAI_API_KEY": "sk-proj-...", "OPEN_TERMINAL_ALLOWED_DOMAINS": "*.pypi.org,github.com"},
     "idle_timeout_minutes": 30
   }'
 ```
@@ -70,7 +69,6 @@ curl -X POST http://localhost:3000/p/data-science/execute \
 | `memory_limit` | string | Max memory (e.g. `"4Gi"`) |
 | `storage` | string | Persistent volume size (absent = ephemeral) |
 | `storage_mode` | string | `per-user`, `shared`, `shared-rwo` (absent = global default) |
-| `allowed_domains` | list | `["*"]` = full, `[]` = none, `["*.pypi.org"]` = restricted |
 | `idle_timeout_minutes` | int | Idle timeout before cleanup |
 
 ## Configuration
