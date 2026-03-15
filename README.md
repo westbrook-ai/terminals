@@ -20,7 +20,7 @@ Giving terminal access to users on Open WebUI requires per-user isolation: separ
 | **Runtime changes** | Update policies via API without redeployment |
 
 > [!IMPORTANT]
-> **Production use requires an [Open WebUI Enterprise License](LICENSE) that includes Terminals.** Contact the Open WebUI team to verify your plan covers it.
+> **Production use requires an [Open WebUI Enterprise License](LICENSE) with Terminals access.** Contact the Open WebUI team to get started.
 
 
 ## Quick Start
